@@ -8,11 +8,16 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputScript library="js" name="takvimTurkce.js"/>
-        <title>Facelets Template</title>
+        <title>
+            <ui:insert name="sayfaBasligi">
+                Rehber Uygulaması
+            </ui:insert>
+        </title>
     </h:head>
 
     <h:body>
-        <p:layout fullPage="true">
+        <h:form>
+            <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                     <ui:insert name="top">
@@ -37,18 +42,32 @@
                     </ui:insert>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="120" collapsible="true">
+                <p:layoutUnit position="west" size="200" collapsible="true">
                     <ui:insert name="left">
-                        <p:menu style="width: 80px">
-                            <p:submenu label="Menü">
-                                <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                                <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
+                        <p:panelMenu style="width: 100%">
+                            <p:submenu label="Kişi">
+                                <p:menuitem title="Ekle"
+                                            url="kisiEkle.xhtml?faces-redirect=true"
+                                            icon="ui-icon-plus"
+                                            value="Ekle"/>
+                                <p:menuitem title="Listele"
+                                            url="kisiListele.xhtml?faces-redirect=true"
+                                            icon="ui-icon-script"
+                                            value="Listele"/>
                             </p:submenu>
-
-                        </p:menu>
+                            <p:submenu label="Giriş-Çıkış">
+                                <p:menuitem title="Giriş"
+                                            url="giris.xhtml?faces-redirect=true"
+                                            icon="ui-icon-check"
+                                            value="Giriş"/>
+                                <p:menuitem title="Çıkış"
+                                            action="#{girisBean.guvenliCikis()}"
+                                            icon="ui-icon-close"
+                                            value="Güvenli Çıkış"/>
+                            </p:submenu>
+                            <p:submenu label="Deneme" rendered="false">
+                            </p:submenu>
+                        </p:panelMenu>
                     </ui:insert>
                 </p:layoutUnit>
 
@@ -56,7 +75,8 @@
                     <ui:insert name="content">Content</ui:insert>
                 </p:layoutUnit>
 
-            </p:layout>        
+            </p:layout>     
+        </h:form>
     </h:body>
 
 </html>

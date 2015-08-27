@@ -1,5 +1,6 @@
 package tr.gov.ptt.rehbermaven.bean;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -31,5 +32,9 @@ public class KisiBean {
         JSFUtil.mesajGoster("Kişi Eklendi", kisi.getAd() + " " + kisi.getSoyad()
                 + " eklendi.");
         return "kisiListele.xhtml?faces-redirect=true";
+    }
+    public List<Kisi> getKisiListe()
+    {
+        return kisiService.kisileriGetir();
     }
 }
