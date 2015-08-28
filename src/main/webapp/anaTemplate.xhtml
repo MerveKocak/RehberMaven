@@ -16,67 +16,91 @@
     </h:head>
 
     <h:body>
-        <h:form>
-            <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <ui:insert name="top">
-                        <table style="width:100%">
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                <ui:insert name="top">
+                    <h:form>
+                        <table style="width:100%; height: 80px">
                             <tr>
                                 <td style="width:30%">
                                     <p:graphicImage library="images"
                                                     name="ptt.gif"
                                                     width="120px"/>
                                 </td>
-                                <td style="width: 70%" align="center">
+                                <td style="width: 40%" align="center">
                                     <h2>Rehber Uygulaması</h2>
+                                </td>
+                                <td style="width: 30%" align="center">
+                                    Hoşgeldin #{session.getAttribute("kullanici")}
+                                    <br/>
+                                    Tekrar hoşgeldin #{girisBean.giris.kullanici}
+                                    <br/>
+                                    Tarih saat: <p:outputLabel id="tarihSaat"
+                                                               value="#{girisBean.sistemTarihSaatGetir()}"/>
+                                    <p:poll interval="1" 
+                                            listener="#{girisBean.sistemTarihSaatGuncelle()}"
+                                            update="tarihSaat"/>
+                                    <br/>
+                                    Tarih saat: <p:clock pattern="dd/MM/yyyy HH:mm:ss"
+                                                         mode="server"/>
                                 </td>
                             </tr>
                         </table>
-                    </ui:insert>
-                </p:layoutUnit>
+                    </h:form>
+                </ui:insert>
+            </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="20%" closable="true" collapsible="true">
-                    <ui:insert name="bottom">
-                        <center><h6>Copyright@2015</h6></center>
-                    </ui:insert>
-                </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="200" collapsible="true">
-                    <ui:insert name="left">
-                        <p:panelMenu style="width: 100%">
-                            <p:submenu label="Kişi">
-                                <p:menuitem title="Ekle"
-                                            url="kisiEkle.xhtml?faces-redirect=true"
-                                            icon="ui-icon-plus"
-                                            value="Ekle"/>
-                                <p:menuitem title="Listele"
-                                            url="kisiListele.xhtml?faces-redirect=true"
-                                            icon="ui-icon-script"
-                                            value="Listele"/>
-                            </p:submenu>
-                            <p:submenu label="Giriş-Çıkış">
-                                <p:menuitem title="Giriş"
-                                            url="giris.xhtml?faces-redirect=true"
-                                            icon="ui-icon-check"
-                                            value="Giriş"/>
-                                <p:menuitem title="Çıkış"
-                                            action="#{girisBean.guvenliCikis()}"
-                                            icon="ui-icon-close"
-                                            value="Güvenli Çıkış"/>
-                            </p:submenu>
-                            <p:submenu label="Deneme" rendered="false">
-                            </p:submenu>
-                        </p:panelMenu>
-                    </ui:insert>
-                </p:layoutUnit>
+            <p:layoutUnit position="south" size="20%" closable="true" collapsible="true">
+                <ui:insert name="bottom">
+                    <center><h6>Copyright@2015</h6></center>
+                </ui:insert>
+            </p:layoutUnit>
 
-                <p:layoutUnit position="center">
-                    <ui:insert name="content">Content</ui:insert>
-                </p:layoutUnit>
 
-            </p:layout>     
-        </h:form>
+            <p:layoutUnit position="west" size="200" collapsible="true">
+                <ui:insert name="left">
+                    <h:form>
+                        <p:panelMenu model="#{menuBean.model}"/>
+                        <ui:remove>
+                            <p:panelMenu style="width: 100%">
+                                <p:submenu label="Kişi">
+                                    <p:menuitem title="Ekle"
+                                                url="kisiEkle.xhtml?faces-redirect=true"
+                                                icon="ui-icon-plus"
+                                                value="Ekle"/>
+                                    <p:menuitem title="Listele"
+                                                url="kisiListele.xhtml?faces-redirect=true"
+                                                icon="ui-icon-script"
+                                                value="Listele"/>
+                                </p:submenu>
+                                <p:submenu label="Giriş-Çıkış">
+                                    <p:menuitem title="Giriş"
+                                                url="giris.xhtml?faces-redirect=true"
+                                                icon="ui-icon-check"
+                                                value="Giriş"/>
+                                    <p:menuitem title="Çıkış"
+                                                action="#{girisBean.guvenliCikis()}"
+                                                icon="ui-icon-close"
+                                                value="Güvenli Çıkış"/>
+                                </p:submenu>
+                                <p:submenu label="Deneme" rendered="false">
+                                </p:submenu>
+                            </p:panelMenu>
+                        </ui:remove>
+                        
+                    </h:form>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="content">Content</ui:insert>
+            </p:layoutUnit>
+
+        </p:layout>     
+
     </h:body>
 
 </html>

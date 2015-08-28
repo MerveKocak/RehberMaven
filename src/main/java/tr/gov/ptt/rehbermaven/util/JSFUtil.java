@@ -1,5 +1,6 @@
 package tr.gov.ptt.rehbermaven.util;
 
+import java.text.SimpleDateFormat;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -27,5 +28,8 @@ public class JSFUtil {
                 addMessage("null", new FacesMessage(FacesMessage.SEVERITY_ERROR, p_mesaj, p_detay));
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
     }
-    
+    public static String getKullanici()
+    {
+        return getSession().getAttribute("kullanici").toString();
+    }
 }

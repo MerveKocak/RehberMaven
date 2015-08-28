@@ -14,17 +14,34 @@
             </ui:define>
 
             <ui:define name="content">
+
                 <h:form id="listeleForm">
-                    <p:dataTable id="listeTablo" editable="true"
+                    <p:growl id="mesajlar" showDetail="true"/>
+                    <p:dataTable id="listeTablo" 
+                                 editable="true"
                                  value="#{kisiBean.kisiListe}"
                                  var="kisi"
                                  paginator="true"
+                                 rows="3"
                                  rowsPerPageTemplate="3,6,9">
+                        <p:ajax event="rowEdit"
+                                listener="#{kisiBean.onRowEdit}"
+                                update=":listeleForm:mesajlar"/>
+                        <p:ajax event="rowEditCancel"
+                                listener="#{kisiBean.onRowCancel}"
+                                update=":listeleForm:mesajlar"/>
                         <p:column headerText="No">
                             <h:outputText value="#{kisi.no}"/>
                         </p:column>
                         <p:column headerText="Ad">
-                            <h:outputText value="#{kisi.ad}"/>
+                            <p:cellEditor>
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{kisi.ad}"/>
+                                </f:facet>
+                                <f:facet name="input"> 
+                                    <h:inputText value="#{kisi.ad}"/>
+                                </f:facet>
+                            </p:cellEditor>
                         </p:column>
                         <p:column headerText="Soyad">
                             <h:outputText value="#{kisi.soyad}"/>
@@ -37,6 +54,10 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy"
                                                    timeZone="EET"/>
                             </h:outputText>
+                        </p:column>
+                        <p:column style="width: 32px"
+                                  exportable="false">
+                            <p:rowEditor/>
                         </p:column>
                     </p:dataTable>
                     <p:commandButton value="PDF" ajax="false">
