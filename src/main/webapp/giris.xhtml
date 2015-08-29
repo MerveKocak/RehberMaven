@@ -20,9 +20,9 @@
                 <p:inputText value="#{girisBean.giris.kullanici}" 
                              id="kullanici"
                              label="Kullanıcı Adı"
-                             required="true"
-                             requiredMessage="Kullanıcı adı boş geçilemez!">
+                             required="true">
                     <p:ajax event="keyup" update="kullaniciMsg"/>
+                    <f:validateLength minimum="3" maximum="8"/>
                 </p:inputText>
                 <p:message for="kullanici"
                            id="kullaniciMsg"/>
@@ -31,7 +31,6 @@
                              id="sifre"
                              label="Şifre"
                              required="true"
-                             requiredMessage="Şifre boş geçilemez!"
                              redisplay="true">
                     <p:ajax event="keyup" update="sifreMsg"/>
                 </p:password>

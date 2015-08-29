@@ -41,5 +41,9 @@ public class KisiService {
     {
         return kisiFacade.findAll();
     }
+    public List<String> isimleriGetir()
+    {
+        return kisiFacade.isimleriGetir();
+    }
     
 }

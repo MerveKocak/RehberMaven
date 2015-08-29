@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "MENU")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m"),
+    @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m ORDER BY m.no"),
     @NamedQuery(name = "Menu.findByNo", query = "SELECT m FROM Menu m WHERE m.no = :no"),
     @NamedQuery(name = "Menu.findByAd", query = "SELECT m FROM Menu m WHERE m.ad = :ad"),
     @NamedQuery(name = "Menu.findByLink", query = "SELECT m FROM Menu m WHERE m.link = :link"),

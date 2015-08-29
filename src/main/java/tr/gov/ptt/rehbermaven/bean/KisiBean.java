@@ -2,6 +2,7 @@ package tr.gov.ptt.rehbermaven.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -17,6 +18,7 @@ public class KisiBean {
 
     private Kisi kisi = new Kisi();
     private List<Kisi> kisiListesi = new ArrayList<Kisi>();
+    private List<String> isimListesi = new ArrayList<String>();
     @EJB
     private KisiService kisiService;
 
@@ -26,6 +28,7 @@ public class KisiBean {
     @PostConstruct
     public void doldurKisiListe() {
         kisiListesi = kisiService.kisileriGetir();
+        isimListesi = kisiService.isimleriGetir();
     }
     public Kisi getKisi() {
         return kisi;
@@ -62,6 +65,21 @@ public class KisiBean {
         kisi = (Kisi) p_event.getObject();
         JSFUtil.mesajGoster("Kişi Güncellenmedi.", kisi.getAd() + " " + kisi.getSoyad()
                 + "güncellenmedi");
+    }
+    public List<String> tamamlaMetot(String p_sorgu)
+    {
+        //List<String> isimListe = kisiService.isimleriGetir();
+        List<String> sonucListe = new ArrayList<>();
+//        for (String isim : isimListe) {
+//            if(isim.startsWith(p_sorgu))
+//                sonucListe.add(isim);
+//        }
+        for (String isim : isimListesi) {
+            if(isim.toUpperCase(new Locale("tr","TR")).
+                    startsWith(p_sorgu.toUpperCase(new Locale("tr","TR"))))
+                sonucListe.add(isim);
+        }
+        return sonucListe;
     }
 
 }

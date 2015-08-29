@@ -1,5 +1,6 @@
 package tr.gov.ptt.rehbermaven.facade;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +18,10 @@ public class KisiFacade extends AbstractFacade<Kisi> {
 
     public KisiFacade() {
         super(Kisi.class);
+    }
+    public List<String> isimleriGetir()
+    {
+        return em.createQuery("select k.ad from Kisi k").getResultList();
     }
     
 }
